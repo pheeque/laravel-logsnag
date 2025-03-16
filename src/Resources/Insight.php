@@ -18,8 +18,13 @@ class Insight
      */
     public function publish(array $payload): InsightResponse
     {
+
         if (! array_key_exists('project', $payload)) {
             $payload['project'] = config('logsnag.project');
+        }
+
+        if (config('logsnag.disabled')) {
+            return InsightResponse::from($payload);
         }
 
         /** @var array{icon?: string, project: string, title: string, value: numeric|string} $response */

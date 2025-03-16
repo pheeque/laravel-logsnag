@@ -18,8 +18,13 @@ class Identify
      */
     public function publish(array $payload): IdentifyResponse
     {
+
         if (! array_key_exists('project', $payload)) {
             $payload['project'] = config('logsnag.project');
+        }
+
+        if (config('logsnag.disabled')) {
+            return IdentifyResponse::from($payload);
         }
 
         /** @var array{project: string, properties: array{string: bool|numeric|string}, user_id: string} $response */

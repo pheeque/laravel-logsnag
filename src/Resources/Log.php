@@ -18,8 +18,13 @@ class Log
      */
     public function publish(array $payload): LogResponse
     {
+
         if (! array_key_exists('project', $payload)) {
             $payload['project'] = config('logsnag.project');
+        }
+
+        if (config('logsnag.disabled')) {
+            return LogResponse::from($payload);
         }
 
         /** @var array{channel: string, description?: string, event: string, icon?: string, notify?: bool, parse?: 'markdown'|'text', project: string, tags?: array<string, bool|numeric|string>, user_id?: string} $response */
