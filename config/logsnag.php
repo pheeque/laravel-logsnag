@@ -29,6 +29,4 @@ return [
 
     'project' => env('LOGSNAG_PROJECT'),
 
-    'disabled' => env('LOGSNAG_DISABLED', false),
-
 ];

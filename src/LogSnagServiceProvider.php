@@ -22,7 +22,7 @@ class LogSnagServiceProvider extends ServiceProvider implements DeferrableProvid
         $this->app->singleton(ClientContract::class, function ($app): Client {
             $config = $app['config']['logsnag'];
 
-            if (! is_string($apiToken = $config['api_token'])) {
+            if (! is_string($apiToken = $config['api_token'] ?? '')) {
                 throw ApiTokenIsMissing::create();
             }
 

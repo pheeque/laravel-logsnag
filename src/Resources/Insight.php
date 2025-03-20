@@ -23,7 +23,7 @@ class Insight
             $payload['project'] = config('logsnag.project');
         }
 
-        if (config('logsnag.disabled')) {
+        if (!config('logsnag.api_token')) {
             return InsightResponse::from($payload);
         }
 
